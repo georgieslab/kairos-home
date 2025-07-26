@@ -1859,6 +1859,10 @@
     </div>
 
     <script>
+        // Force HTTPS redirect
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
         // LOADING SCREEN LOGIC
         window.addEventListener('load', function() {
             const loadingOverlay = document.getElementById('loadingOverlay');
