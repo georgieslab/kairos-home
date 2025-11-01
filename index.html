@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Καιρός Smart Journal - AI-Powered Journaling for Personal Growth</title>
-    <meta name="description" content="Transform your journaling practice with AI-powered insights. 40 unique paths, personality analysis, and privacy-first design. Bridge physical handwriting with digital wisdom.">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Καιρός Smart Journal - Where Ancient Wisdom Meets Modern AI</title>
+    <meta name="description" content="Transform your journaling practice with AI-powered insights. 45 unique paths across text, voice, and visual journaling. Built with Claude AI. Privacy-first design.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Καιρός Smart Journal - AI-Powered Journaling">
+    <meta property="og:description" content="45 unique journaling paths. Text, voice, and visual reflection. Privacy-first AI analysis.">
+    <meta property="og:image" content="https://i.imgur.com/07nIev9.png">
+    <meta property="og:type" content="website">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/07nIev9.png">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -27,28 +33,39 @@
             --accent-pink: #EC4899;
             --accent-purple: #A855F7;
             --accent-amber: #F59E0B;
+            --accent-orange: #F97316;
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-light: rgba(255, 255, 255, 0.6);
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-light: rgba(255, 255, 255, 0.65);
             --bg-primary: #0a0f1c;
             --bg-secondary: #1a2742;
+            --bg-tertiary: #243152;
             --bg-accent: rgba(16, 185, 129, 0.1);
             --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-light: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-medium: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.1);
-            --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
             --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
             --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            --gradient-purple: linear-gradient(135deg, #A855F7 0%, #8B5CF6 100%);
+            --gradient-sunset: linear-gradient(135deg, #F97316 0%, #EC4899 100%);
             --gradient-hero: linear-gradient(135deg, #1a2742 0%, #0a0f1c 100%);
         }
 
-        /* LOADING SCREEN STYLES */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           LOADING SCREEN
+           ============================================ */
         .loading-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: linear-gradient(135deg, #0a0f1c 0%, #1a2742 100%);
             display: flex;
             align-items: center;
@@ -68,12 +85,11 @@
             flex-direction: column;
             align-items: center;
             gap: 2rem;
-            position: relative;
         }
 
         .logo-loader {
-            width: 10rem;
-            height: 2.5rem;
+            width: 12rem;
+            height: 3rem;
             opacity: 0;
             animation: logoReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
         }
@@ -82,7 +98,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));
+            filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.6));
         }
 
         .loading-dots {
@@ -93,8 +109,8 @@
         }
 
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(135deg, #10B981, #059669);
             border-radius: 50%;
             animation: dotWave 1.5s ease-in-out infinite;
@@ -105,17 +121,19 @@
         .dot:nth-child(2) { animation-delay: 0.15s; }
         .dot:nth-child(3) { animation-delay: 0.3s; }
 
-        /* ANIMATIONS */
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
         @keyframes logoReveal {
             0% {
                 opacity: 0;
                 transform: translateY(30px) scale(0.8);
-                filter: blur(10px);
+                filter: blur(10px) drop-shadow(0 0 30px rgba(16, 185, 129, 0.6));
             }
             100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
-                filter: blur(0);
+                filter: blur(0) drop-shadow(0 0 30px rgba(16, 185, 129, 0.6));
             }
         }
 
@@ -125,7 +143,7 @@
                 opacity: 1;
             }
             50% {
-                transform: translateY(-15px) scale(1.2);
+                transform: translateY(-15px) scale(1.3);
                 opacity: 0.7;
             }
         }
@@ -138,7 +156,7 @@
         @keyframes fadeInUp {
             from { 
                 opacity: 0; 
-                transform: translateY(30px); 
+                transform: translateY(40px); 
             }
             to { 
                 opacity: 1; 
@@ -146,15 +164,9 @@
             }
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            75% { transform: translateY(10px) rotate(-2deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes pulse {
@@ -165,17 +177,6 @@
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
-        }
-
-        @keyframes slideInFromTop {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @keyframes scaleIn {
@@ -189,142 +190,143 @@
             }
         }
 
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         @keyframes ripple {
             0% {
-                width: 100%;
-                height: 100%;
+                transform: scale(1);
                 opacity: 1;
             }
             100% {
-                width: 150%;
-                height: 150%;
+                transform: scale(1.5);
                 opacity: 0;
             }
         }
 
-        @keyframes glow {
-            from {
-                box-shadow: 
-                    0 20px 40px rgba(16, 185, 129, 0.2),
-                    0 0 60px rgba(16, 185, 129, 0.1);
-            }
-            to {
-                box-shadow: 
-                    0 20px 40px rgba(16, 185, 129, 0.3),
-                    0 0 80px rgba(16, 185, 129, 0.2);
-            }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        /* Hide main content during loading */
         .main-content {
             opacity: 0;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+            transition: opacity 0.8s ease-in-out;
         }
 
         .main-content.visible {
             opacity: 1;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            overflow-x: hidden;
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
+        .fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
 
-        /* Scroll Progress Indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: scaleX(0);
-            transform-origin: left;
-            z-index: 1001;
-            transition: transform 0.1s ease;
+        .section {
+            padding: 6rem 0;
+            position: relative;
         }
 
-        /* Navigation */
+        /* ============================================
+           NAVIGATION
+           ============================================ */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 15, 28, 0.85);
+            z-index: 1000;
+            background: rgba(10, 15, 28, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
             background: rgba(10, 15, 28, 0.95);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-md);
         }
 
-        .nav-container {
+        .navbar-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 4rem;
-            max-width: 1200px;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.5rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            gap: 0.75rem;
             text-decoration: none;
-            transition: transform 0.3s ease;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-icon {
-            width: 8rem;
-            height: 2rem;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .logo img {
+            height: 36px;
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
-            text-decoration: none;
             color: var(--text-secondary);
+            text-decoration: none;
             font-weight: 500;
-            position: relative;
             transition: color 0.3s ease;
+            position: relative;
         }
 
         .nav-links a::after {
@@ -334,7 +336,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary-color);
+            background: var(--gradient-primary);
             transition: width 0.3s ease;
         }
 
@@ -346,76 +348,108 @@
             width: 100%;
         }
 
-        .nav-actions {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .cta-button {
+        .nav-cta {
             background: var(--gradient-primary);
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            z-index: 1001;
+            transform-origin: left;
+            transition: transform 0.1s ease-out;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
             border: none;
             cursor: pointer;
-            white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
+            padding: 0.5rem;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        .mobile-menu-toggle svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--text-primary);
+            stroke-width: 2;
         }
 
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 15, 28, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
         }
 
-        .cta-button.secondary {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-primary);
+        .mobile-menu.active {
+            transform: translateY(0);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .cta-button.secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--primary-color);
+        .mobile-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
             color: var(--primary-color);
         }
 
-        /* Hero Section with MORE TRANSPARENT overlay */
+        .mobile-nav-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
             background: 
-                linear-gradient(135deg, rgba(26, 39, 66, 0.3) 0%, rgba(10, 15, 28, 0.4) 100%),
-                url('https://i.imgur.com/lg8YhTl.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 8rem 0 6rem;
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                var(--gradient-hero);
             position: relative;
             overflow: hidden;
-            color: white;
         }
 
         .hero::before {
@@ -425,376 +459,209 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="2"/></g></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                transparent, 
-                rgba(16, 185, 129, 0.05), 
-                transparent, 
-                rgba(139, 92, 246, 0.05), 
-                transparent);
-            background-size: 400% 400%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(16, 185, 129, 0.05) 50%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+            background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
             pointer-events: none;
         }
 
         .hero-content {
+            max-width: 900px;
             position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            z-index: 1;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
-            font-weight: 500;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            animation: slideInFromTop 1s ease-out;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .hero-badge svg {
-            color: var(--accent-amber);
+            width: 16px;
+            height: 16px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .hero-title {
+        .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 800;
             line-height: 1.1;
-            background: linear-gradient(45deg, #ffffff, #10B981, #ffffff);
-            background-size: 200% 200%;
-            background-clip: text;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite, scaleIn 1s ease-out 0.2s both;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
             margin-bottom: 1rem;
-            opacity: 0;
-            font-weight: 400;
-            animation: fadeInUp 1s ease-out 0.4s forwards;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .hero-description {
-            font-size: 1.125rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
             margin-bottom: 3rem;
-            opacity: 0;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
         }
 
         .hero-actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
-            align-items: center;
             flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.8s forwards;
+            animation: fadeInUp 0.8s ease-out 1.2s both;
         }
 
-        .hero-cta {
-            background: white;
-            color: var(--primary-color);
-            padding: 1rem 2rem;
-            border-radius: 0.75rem;
-            text-decoration: none;
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
             font-weight: 600;
-            font-size: 1.125rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .hero-cta:hover::before {
-            left: 100%;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 0.75rem;
+            font-size: 1.1rem;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            gap: 0.75rem;
         }
 
-        .hero-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
         }
 
-        .hero-features {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1s forwards;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
         }
 
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            transition: transform 0.3s ease;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
         }
 
-        .hero-feature:hover {
-            transform: translateY(-2px);
+        .btn svg {
+            width: 20px;
+            height: 20px;
         }
 
-        .hero-feature svg {
-            color: var(--primary-color);
-        }
-
-        /* App Showcase Section */
-        .app-showcase {
-            padding: 6rem 0;
-            background: var(--bg-secondary);
-            position: relative;
-            overflow: hidden;
+        /* ============================================
+           FEATURES SECTION
+           ============================================ */
+        .features {
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                var(--bg-primary);
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            max-width: 700px;
+            margin: 0 auto 4rem;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--gradient-primary);
+            background: var(--gradient-secondary);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            position: relative;
-            animation: pulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            line-height: 1.2;
         }
 
-        .section-subtitle {
-            font-size: 1.125rem;
+        .section-description {
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .app-showcase-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .app-showcase-content {
-            padding: 2rem 0;
-        }
-
-        .showcase-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .showcase-description {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .showcase-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .showcase-feature {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .showcase-feature svg {
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
-
-        .showcase-cta {
-            margin-bottom: 1.5rem;
-        }
-
-        .showcase-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 0.75rem;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.125rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .showcase-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .showcase-button:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .showcase-button:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-large);
-        }
-
-        .showcase-note {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-light);
-            font-size: 0.875rem;
-            margin-top: 1rem;
-        }
-
-        .showcase-note svg {
-            color: var(--primary-color);
-        }
-
-        .app-screenshot-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
-
-        .app-combined-screenshot {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 1rem;
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 10px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: rotateY(0deg) rotateX(0deg);
-            transform-style: preserve-3d;
-        }
-
-        .app-combined-screenshot:hover {
-            transform: scale(1.02) rotateY(5deg) rotateX(5deg);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.5),
-                0 15px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background: var(--bg-secondary);
+            line-height: 1.7;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow-light);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
         .feature-card::before {
@@ -803,603 +670,699 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                transparent, 
-                rgba(16, 185, 129, 0.1), 
-                transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.3),
-                0 0 50px rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-icon {
-            width: 3rem;
-            height: 3rem;
+            width: 60px;
+            height: 60px;
             background: var(--gradient-primary);
-            border-radius: 0.75rem;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
         }
 
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
         }
 
-        .feature-description {
+        .feature-card p {
             color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .feature-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, rgba(251, 191, 36, 0.2), rgba(234, 88, 12, 0.2));
-            color: #FBBF24;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 600;
+            line-height: 1.7;
             margin-bottom: 1rem;
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            position: relative;
-            overflow: hidden;
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
         }
 
-        /* Stats Section */
-        .stats {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            padding: 4rem 0;
+        .feature-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .feature-highlight svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ============================================
+           JOURNEY PATHS SECTION
+           ============================================ */
+        .journey-paths {
+            background: var(--gradient-hero);
+        }
+
+        .paths-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .path-category {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .stats::before {
+        .path-category::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            animation: slidePattern 20s linear infinite;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
         }
 
-        @keyframes slidePattern {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        .path-category:hover::before {
+            left: 100%;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
+        .path-category:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
         }
 
-        .stat-item {
-            padding: 1rem;
-            transform: translateY(50px);
-            opacity: 0;
+        .path-icon-large {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .stat-item.animate {
-            animation: slideInUp 0.8s ease-out forwards;
+        .path-icon-large.text {
+            background: var(--gradient-primary);
         }
 
-        @keyframes slideInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .path-icon-large.voice {
+            background: var(--gradient-purple);
         }
 
-        .stat-number {
-            font-size: 3rem;
+        .path-icon-large.visual {
+            background: var(--gradient-sunset);
+        }
+
+        .path-icon-large svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .path-category h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .path-count {
+            font-size: 2.5rem;
             font-weight: 800;
+            font-family: 'Playfair Display', serif;
             margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, #ffffff, #e0e7ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .stat-label {
-            font-size: 1.125rem;
-            opacity: 0.9;
+        .path-count.text { color: var(--primary-color); }
+        .path-count.voice { color: var(--secondary-color); }
+        .path-count.visual { color: var(--accent-pink); }
+
+        .path-category p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        /* How it Works */
+        .path-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .path-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+        }
+
+        /* ============================================
+           HOW IT WORKS SECTION
+           ============================================ */
         .how-it-works {
-            padding: 6rem 0;
-            background: var(--bg-primary);
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                var(--bg-primary);
         }
 
-        .steps-grid {
+        .steps-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
             position: relative;
         }
 
         .step-card {
             text-align: center;
-            position: relative;
             opacity: 0;
             transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
         .step-card.animate {
-            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .step-number {
-            width: 4rem;
-            height: 4rem;
+            width: 70px;
+            height: 70px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
             margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: white;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
             position: relative;
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        .step-number::before {
+        .step-number::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             border: 2px solid var(--primary-color);
+            border-radius: 50%;
             animation: ripple 2s ease-out infinite;
         }
 
-        .step-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+        .step-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-primary);
         }
 
-        .step-description {
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* ============================================
+           CREATOR STORY SECTION
+           ============================================ */
+        .creator-story {
+            background: var(--gradient-hero);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+
+        .story-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(10, 15, 28, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .story-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .story-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-quote {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-style: italic;
             color: var(--text-secondary);
         }
 
-        /* Pricing */
-        .pricing {
-            padding: 6rem 0;
+        .story-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .story-highlight-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+
+        .story-highlight-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--primary-color);
+            stroke-width: 2;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .story-highlight-item span {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           TESTIMONIALS SECTION
+           ============================================ */
+        .testimonials {
+            background: var(--bg-primary);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
             background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-rating svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent-amber);
+            stroke: none;
+        }
+
+        /* ============================================
+           PRICING SECTION
+           ============================================ */
+        .pricing {
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                var(--gradient-hero);
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
-            justify-content: center;
+            max-width: 1100px;
+            margin: 3rem auto 0;
         }
 
         .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: var(--shadow-light);
+            background: var(--bg-secondary);
             border: 2px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
         .pricing-card.featured {
             border-color: var(--primary-color);
             transform: scale(1.05);
-            animation: glow 2s ease-in-out infinite alternate;
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.3);
         }
 
         .pricing-card.featured::before {
-            content: 'Most Popular';
+            content: 'MOST POPULAR';
             position: absolute;
-            top: 1rem;
-            right: -2rem;
-            background: var(--gradient-secondary);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 0.5rem 3rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transform: rotate(45deg);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
         }
 
         .pricing-tier {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .pricing-price {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
         }
 
         .pricing-price span {
-            font-size: 1rem;
-            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-light);
         }
 
-        .pricing-description {
-            color: var(--text-secondary);
+        .pricing-period {
+            color: var(--text-light);
             margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
         .pricing-features {
             list-style: none;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
+            text-align: left;
         }
 
         .pricing-features li {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
+            align-items: start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
             color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .pricing-features .check {
-            color: var(--primary-color);
+        .pricing-features li:last-child {
+            border-bottom: none;
         }
 
-        .pricing-button {
+        .pricing-features svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--primary-color);
+            stroke-width: 2;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-cta {
             width: 100%;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            margin-top: 1.5rem;
         }
 
-        .pricing-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta-section {
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
+                var(--bg-primary);
+            text-align: center;
         }
 
-        .pricing-button:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .pricing-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Founder Section */
-        .founder {
-            padding: 6rem 0;
-            background: var(--bg-primary);
-        }
-
-        .founder-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .founder-image {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: var(--shadow-large);
+        .cta-content {
+            max-width: 800px;
             margin: 0 auto;
-            display: block;
-            border: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
         }
 
-        .founder-image:hover {
-            transform: scale(1.05);
-        }
-
-        .founder-text h3 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .founder-text p {
-            color: var(--text-secondary);
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
             margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
             line-height: 1.7;
         }
 
-        .founder-quote {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            border-left: 4px solid var(--primary-color);
-            margin: 2rem 0;
-            font-style: italic;
-            color: var(--text-primary);
-            backdrop-filter: blur(10px);
+        .cta-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        /* Final CTA */
-        .final-cta {
-            background: 
-                linear-gradient(135deg, rgba(26, 39, 66, 0.7) 0%, rgba(10, 15, 28, 0.8) 100%),
-                url('https://i.imgur.com/lg8YhTl.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .final-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .final-cta h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .final-cta p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .final-cta-button {
-            background: white;
-            color: var(--primary-color);
-            padding: 1.25rem 2.5rem;
-            border-radius: 0.75rem;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.25rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
+        .social-proof {
+            display: flex;
             align-items: center;
-            gap: 0.75rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
-        .final-cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .social-proof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
-        /* Footer */
+        .social-proof-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary-color);
+            stroke-width: 2;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
         .footer {
-            background: #0a0f1c;
-            color: white;
-            padding: 3rem 0 1rem;
+            background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            color: var(--text-light);
+            line-height: 1.7;
             margin-bottom: 1rem;
-            font-weight: 600;
         }
 
         .footer-section a {
-            color: #9ca3af;
-            text-decoration: none;
             display: block;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 0;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
         }
 
         .footer-section a:hover {
             color: var(--primary-color);
-            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-primary);
+            stroke-width: 2;
         }
 
         .footer-bottom {
-            border-top: 1px solid #374151;
+            text-align: center;
             padding-top: 2rem;
-            text-align: center;
-            color: #9ca3af;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
-        /* Mobile Navigation */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.9);
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 4rem;
-            left: 0;
-            right: 0;
-            background: rgba(10, 15, 28, 0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 999;
-            padding: 1rem;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .mobile-nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .mobile-nav-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .mobile-nav-actions .cta-button {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .hero {
-                padding: 6rem 0 4rem;
-                background-attachment: scroll;
-            }
-
-            .section-title {
-                font-size: 2.25rem;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-
-            .app-showcase-container {
-                gap: 3rem;
-            }
-
-            .founder-content {
-                gap: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 968px) {
             .nav-links {
-                display: none;
-            }
-
-            .nav-actions {
                 display: none;
             }
 
@@ -1407,195 +1370,89 @@
                 display: block;
             }
 
-            .hero {
-                padding: 5rem 0 3rem;
-                text-align: center;
-                background-attachment: scroll;
+            .mobile-menu {
+                display: block;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.125rem;
-                margin-bottom: 1rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
-            }
-
-            .hero-cta,
-            .hero-secondary {
-                justify-content: center;
-                padding: 1rem 1.5rem;
-            }
-
-            .hero-features {
-                flex-direction: column;
-                gap: 1rem;
-                margin-top: 2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                line-height: 1.2;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .stats {
-                padding: 3rem 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .app-showcase-container {
+            .story-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-                text-align: center;
             }
 
-            .showcase-title {
-                font-size: 1.5rem;
-            }
-
-            .showcase-description {
-                font-size: 1rem;
-            }
-
-            .showcase-button {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .app-combined-screenshot {
-                max-width: 100%;
-            }
-
-            .steps-grid {
+            .paths-showcase {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
                 gap: 2rem;
             }
 
             .pricing-card.featured {
-                transform: none !important;
+                transform: scale(1);
             }
 
-            .founder-content {
+            .story-highlights {
                 grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .founder-image {
-                width: 200px;
-                height: 200px;
-            }
-
-            .final-cta h2 {
-                font-size: 2rem;
-            }
-
-            .final-cta p {
-                font-size: 1rem;
-            }
-
-            .final-cta-button {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
             .container {
-                padding: 0 0.75rem;
+                padding: 0 1.5rem;
             }
 
-            .nav-container {
-                padding: 0 0.75rem;
+            .section {
+                padding: 4rem 0;
             }
 
             .hero {
-                padding: 4rem 0 2rem;
+                padding: 6rem 1.5rem 3rem;
             }
 
-            .hero-title {
-                font-size: 2rem;
+            .hero-stats {
+                gap: 2rem;
             }
 
-            .stats-grid {
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .features-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
             }
 
-            .stat-number {
-                font-size: 2rem;
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .footer-content {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
 
-        /* Fade in animation for lazy load */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
+            .cta-actions {
+                flex-direction: column;
+            }
         }
-
-        .fade-in.animate {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator" id="scrollIndicator"></div>
-
-    <!-- LOADING SCREEN -->
-    <div class="loading-overlay" id="loadingOverlay">
+    <!-- Loading Screen -->
+    <div id="loadingOverlay" class="loading-overlay">
         <div class="simple-loader">
             <div class="logo-loader">
-                <img src="https://i.imgur.com/07nIev9.png" alt="Καιρός">
+                <img src="https://i.imgur.com/07nIev9.png" alt="Καιρός Logo">
             </div>
             <div class="loading-dots">
                 <div class="dot"></div>
@@ -1605,422 +1462,693 @@
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content" id="mainContent">
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content">
+        <!-- Scroll Indicator -->
+        <div id="scrollIndicator" class="scroll-indicator"></div>
+
         <!-- Navigation -->
-        <nav class="navbar" id="navbar">
-            <div class="nav-container">
+        <nav id="navbar" class="navbar">
+            <div class="navbar-content">
                 <a href="#" class="logo">
-                    <div class="logo-icon">
-                        <img src="https://i.imgur.com/07nIev9.png" alt="Καιρός Logo">
-                    </div>
+                    <img src="https://i.imgur.com/07nIev9.png" alt="Καιρός">
+                    <span>Καιρός</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#app-showcase">Try App</a></li>
-                    <li><a href="#how-it-works">How it Works</a></li>
+                    <li><a href="#journeys">Journeys</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
-                <div class="nav-actions">
-                    <a href="https://reflection-writer.web.app" target="_blank" class="cta-button secondary">Try Kairos Now</a>
-                    <a href="https://www.kickstarter.com/projects/georgies/a-return-to-mindful-handwriting-in-a-digital-era" target="_blank" class="cta-button">Back on Kickstarter</a>
-                </div>
-                
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="#cta" class="nav-cta">Join Waitlist</a>
+                <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <svg viewBox="0 0 24 24" fill="none">
                         <line x1="3" y1="6" x2="21" y2="6"/>
                         <line x1="3" y1="12" x2="21" y2="12"/>
                         <line x1="3" y1="18" x2="21" y2="18"/>
                     </svg>
                 </button>
             </div>
-            
-            <!-- Mobile Menu -->
-            <div class="mobile-menu" id="mobile-menu">
-                <div class="mobile-nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#app-showcase">Try App</a>
-                    <a href="#how-it-works">How it Works</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#about">About</a>
-                </div>
-                <div class="mobile-nav-actions">
-                    <a href="https://reflection-writer.web.app" target="_blank" class="cta-button secondary">Try Kairos Now</a>
-                    <a href="https://www.kickstarter.com/projects/georgies/a-return-to-mindful-handwriting-in-a-digital-era" target="_blank" class="cta-button">Back on Kickstarter</a>
-                </div>
-            </div>
         </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-nav-links">
+                <a href="#features">Features</a>
+                <a href="#journeys">Journeys</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="mobile-nav-actions">
+                <a href="#cta" class="btn btn-primary" style="width: 100%; justify-content: center;">Join Waitlist</a>
+            </div>
+        </div>
 
         <!-- Hero Section -->
         <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Built with Claude AI • 100% AI-Native Development
+                </div>
+                <h1>Where Ancient Wisdom<br/>Meets Modern AI</h1>
+                <p class="hero-subtitle">
+                    The smart journal inspired by Marcus Aurelius' Meditations.<br/>
+                    Transform handwriting into insights with Claude AI.
+                </p>
+                <p class="hero-description">
+                    Bridge the gap between physical journaling and digital wisdom. NFC-enabled journals meet Claude AI analysis for the deepest self-discovery experience ever created.
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">45</span>
+                        <span class="hero-stat-label">Journey Paths</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">3</span>
+                        <span class="hero-stat-label">Modalities</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">92%</span>
+                        <span class="hero-stat-label">AI Accuracy</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#cta" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2"/>
                         </svg>
-                        Powered by Claude AI
-                    </div>
-                    <h1 class="hero-title">Transform Your Inner World</h1>
-                    <p class="hero-subtitle">AI-Powered Journaling for Personal Growth</p>
-                    <p class="hero-description">
-                        Discover deeper self-awareness through 40 unique journaling paths, 
-                        personality insights, and daily AI questions that evolve with your journey.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="https://reflection-writer.web.app" target="_blank" class="hero-cta">
-                            Try Kairos Now
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 7h10v10"/>
-                                <path d="M7 17L17 7"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.kickstarter.com/projects/georgies/a-return-to-mindful-handwriting-in-a-digital-era" target="_blank" class="hero-secondary">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                            Back on Kickstarter
-                        </a>
-                    </div>
-                    <div class="hero-features">
-                        <div class="hero-feature">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5a2.5 2.5 0 0 1 2.5-2.5A2.5 2.5 0 0 1 17 4.5c0 7-2.5 12-5 12s-5-5-5-12A2.5 2.5 0 0 1 9.5 2"/>
-                            </svg>
-                            AI Personality Analysis
-                        </div>
-                        <div class="hero-feature">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                            </svg>
-                            40 Journey Paths
-                        </div>
-                        <div class="hero-feature">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                            Privacy First
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- App Showcase Section -->
-        <section id="app-showcase" class="app-showcase">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-badge fade-in">Experience Καιρός</div>
-                    <h2 class="section-title fade-in stagger-1">Try the Web App Today</h2>
-                    <p class="section-subtitle fade-in stagger-2">
-                        Experience AI-powered journaling right now. No download required, just open and start your transformation journey.
-                    </p>
-                </div>
-                
-                <div class="app-showcase-container">
-                    <div class="app-showcase-content fade-in">
-                        <div class="showcase-info">
-                            <h3 class="showcase-title">Start Your Journey Instantly</h3>
-                            <p class="showcase-description">
-                                Our web application gives you immediate access to the core Καιρός experience. 
-                                Begin journaling, discover AI insights, and track your emotional patterns - all from your browser.
-                            </p>
-                            
-                            <div class="showcase-features">
-                                <div class="showcase-feature">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                    <span>AI personality analysis</span>
-                                </div>
-                                <div class="showcase-feature">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                    <span>Multiple journey paths</span>
-                                </div>
-                                <div class="showcase-feature">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                    <span>Emotional pattern tracking</span>
-                                </div>
-                                <div class="showcase-feature">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20,6 9,17 4,12"/>
-                                    </svg>
-                                    <span>Cross-device accessibility</span>
-                                </div>
-                            </div>
-                            
-                            <div class="showcase-cta">
-                                <a href="https://reflection-writer.web.app" target="_blank" class="showcase-button primary">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M7 7h10v10"/>
-                                        <path d="M7 17L17 7"/>
-                                    </svg>
-                                    Launch Web App
-                                </a>
-                                <div class="showcase-note">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                    </svg>
-                                    <span>Free to try • No registration required</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="app-screenshot-container fade-in stagger-1">
-                        <img src="https://i.imgur.com/h4y3SdP.png" 
-                             alt="Καιρός App Screenshots - Journey Paths, Daily Reflection, and Analytics" 
-                             class="app-combined-screenshot">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item" style="animation-delay: 0s;">
-                        <div class="stat-number" data-target="40">0</div>
-                        <div class="stat-label">Journey Paths</div>
-                    </div>
-                    <div class="stat-item" style="animation-delay: 0.1s;">
-                        <div class="stat-number" data-target="92">0</div>
-                        <div class="stat-label">Handwriting Accuracy</div>
-                    </div>
-                    <div class="stat-item" style="animation-delay: 0.2s;">
-                        <div class="stat-number" data-target="100">0</div>
-                        <div class="stat-label">Privacy Protected</div>
-                    </div>
-                    <div class="stat-item" style="animation-delay: 0.3s;">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Personal Growth</div>
-                    </div>
+                        Join Kickstarter Waitlist
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+                        </svg>
+                        Watch Demo
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="features">
+        <section id="features" class="section features">
             <div class="container">
-                <div class="section-header">
-                    <div class="section-badge fade-in">Revolutionary Features</div>
-                    <h2 class="section-title fade-in stagger-1">Why Καιρός is Different</h2>
-                    <p class="section-subtitle fade-in stagger-2">
-                        Experience the perfect blend of ancient wisdom and cutting-edge AI technology
+                <div class="section-header fade-in">
+                    <span class="section-badge">Revolutionary Technology</span>
+                    <h2 class="section-title">Why Καιρός is Different</h2>
+                    <p class="section-description">
+                        The world's first multi-modal journaling system powered by Claude AI. Write, speak, or create art—your journey, your way.
                     </p>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-card fade-in">
-                        <div class="feature-badge">NEW</div>
-                        <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <h3 class="feature-title">AI Personality Insights</h3>
-                        <p class="feature-description">
-                            Discover who you truly are through comprehensive AI analysis of your journal entries. 
-                            Understand your core strengths, values, and motivations with personalized insights.
-                        </p>
-                    </div>
                     <div class="feature-card fade-in stagger-1">
-                        <div class="feature-badge">NEW</div>
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Daily AI Questions</h3>
-                        <p class="feature-description">
-                            Ask one personalized question daily and receive insights based on your entire journaling journey. 
-                            Get answers that evolve as your self-awareness grows.
-                        </p>
+                        <h3>Claude AI Analysis</h3>
+                        <p>Powered by Anthropic's Claude Opus 4 for deep psychological insights and Claude Sonnet 4 for lightning-fast handwriting recognition. The smartest AI for the deepest self-understanding.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            92%+ accuracy on handwriting
+                        </div>
                     </div>
+
                     <div class="feature-card fade-in stagger-2">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3 class="feature-title">40 Unique Journey Paths</h3>
-                        <p class="feature-description">
-                            From 7-day explorations to 100-day transformations. Choose from emotional growth, 
-                            creative expression, mindfulness, and specialized artistic paths.
-                        </p>
+                        <h3>Three Ways to Reflect</h3>
+                        <p>Express yourself through traditional handwriting (28 paths), spoken voice journaling (5 paths), or visual art (11 paths). Plus one revolutionary multi-modal path combining all three.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            45 unique journey paths
+                        </div>
                     </div>
+
                     <div class="feature-card fade-in stagger-3">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 19V5"/>
-                                <path d="M5 12l7-7 7 7"/>
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2"/>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Visual & Text Journaling</h3>
-                        <p class="feature-description">
-                            Express yourself through traditional writing or artistic creation. Upload handwritten pages 
-                            or artwork with 92%+ accuracy text extraction.
-                        </p>
+                        <h3>Privacy First, Always</h3>
+                        <p>Four-tier privacy system: from complete local processing (Level 1) to selective mentor sharing (Level 4). Your thoughts, your control. GDPR compliant, zero-knowledge encryption.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            No cloud required option
+                        </div>
                     </div>
+
                     <div class="feature-card fade-in stagger-4">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2"/>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Deep Analytics</h3>
-                        <p class="feature-description">
-                            Track emotional patterns, identify recurring themes, monitor streak performance, 
-                            and export your complete journey as a PDF book.
-                        </p>
+                        <h3>Voice Journaling</h3>
+                        <p>Speak your truth with live transcription and emotional tone analysis. Real-time recording with instant AI insights. More authentic than writing, faster than typing.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Live transcription & analysis
+                        </div>
                     </div>
-                    <div class="feature-card fade-in stagger-4">
+
+                    <div class="feature-card fade-in stagger-5">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="7.5 4.21 12 6.81 16.5 4.21" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="7.5 19.79 7.5 14.6 3 12" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="21 12 16.5 14.6 16.5 19.79" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="currentColor" stroke-width="2"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
                             </svg>
                         </div>
-                        <h3 class="feature-title">Privacy by Design</h3>
-                        <p class="feature-description">
-                            Your thoughts stay private with end-to-end encryption, local-first storage, 
-                            and complete control over your data. GDPR compliant.
+                        <h3>NFC Magic</h3>
+                        <p>Tap your journal to your phone and instantly connect to your digital insights. No apps to open, no passwords to type. The future of journaling is frictionless.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            One-tap journal access
+                        </div>
+                    </div>
+
+                    <div class="feature-card fade-in stagger-6">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Built with AI, for AI</h3>
+                        <p>The entire app was built using Claude AI as the primary developer. A product designer's vision translated directly into code. The future of software development, today.</p>
+                        <div class="feature-highlight">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            100% AI-native development
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Paths Section -->
+        <section id="journeys" class="section journey-paths">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-badge">45 Unique Paths</span>
+                    <h2 class="section-title">Your Journey, Your Way</h2>
+                    <p class="section-description">
+                        From 4-day intensive transformations to 100-day life-changing odysseys. Choose text, voice, or visual—or try our revolutionary multi-modal path.
+                    </p>
+                </div>
+                <div class="paths-showcase">
+                    <div class="path-category fade-in stagger-1">
+                        <div class="path-icon-large text">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Text Journaling</h3>
+                        <p class="path-count text">28</p>
+                        <p>Traditional handwriting meets AI analysis. From shadow work to gratitude practice, from 4-day breakthroughs to 100-day transformations.</p>
+                        <div class="path-examples">
+                            <span class="path-tag">Self-Discovery</span>
+                            <span class="path-tag">Shadow Work</span>
+                            <span class="path-tag">Emotional Intelligence</span>
+                            <span class="path-tag">Life Vision</span>
+                        </div>
+                    </div>
+
+                    <div class="path-category fade-in stagger-2">
+                        <div class="path-icon-large voice">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" stroke="currentColor"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Voice Journaling</h3>
+                        <p class="path-count voice">5</p>
+                        <p>Speak your truth with live transcription and emotional tone analysis. Build vocal confidence, tell your story, or practice meditation speaking.</p>
+                        <div class="path-examples">
+                            <span class="path-tag">Voice Discovery</span>
+                            <span class="path-tag">Vocal Confidence</span>
+                            <span class="path-tag">Storytelling</span>
+                            <span class="path-tag">Meditation</span>
+                        </div>
+                    </div>
+
+                    <div class="path-category fade-in stagger-3">
+                        <div class="path-icon-large visual">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor"/>
+                                <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor"/>
+                                <polyline points="21 15 16 10 5 21" stroke="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Visual Journaling</h3>
+                        <p class="path-count visual">11</p>
+                        <p>Express through art. Color psychology, sacred geometry, nature sketching, and emotional portraits. Claude AI analyzes colors, symbols, and artistic growth.</p>
+                        <div class="path-examples">
+                            <span class="path-tag">Color Psychology</span>
+                            <span class="path-tag">Sacred Geometry</span>
+                            <span class="path-tag">Ink Mastery</span>
+                            <span class="path-tag">Mindful Art</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <div class="fade-in stagger-4" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2rem; border-radius: 20px; max-width: 600px; margin: 0 auto;">
+                        <h4 style="color: var(--primary-color); font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">
+                            🌟 Plus: Inner Elements Journey
+                        </h4>
+                        <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                            The world's first <strong>multi-modal path</strong> combining text, voice, AND visual journaling. Explore Earth, Water, Fire, Air, and Ether through all three modalities for the ultimate self-discovery experience.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- How it Works -->
-        <section id="how-it-works" class="how-it-works">
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="section how-it-works">
             <div class="container">
-                <div class="section-header">
-                    <div class="section-badge fade-in">Simple Process</div>
-                    <h2 class="section-title fade-in stagger-1">How Καιρός Works</h2>
-                    <p class="section-subtitle fade-in stagger-2">
-                        Start your transformation journey in three simple steps
+                <div class="section-header fade-in">
+                    <span class="section-badge">Simple & Powerful</span>
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-description">
+                        From ancient wisdom to modern insights in just four simple steps.
                     </p>
                 </div>
-                <div class="steps-grid">
-                    <div class="step-card fade-in" style="animation-delay: 0s;">
+                <div class="steps-container">
+                    <div class="step-card">
                         <div class="step-number">1</div>
-                        <h3 class="step-title">Choose Your Path</h3>
-                        <p class="step-description">
-                            Select from 40 unique journaling paths tailored to your personal growth goals. 
-                            From emotional intelligence to creative expression.
-                        </p>
+                        <h3>Write, Speak, or Create</h3>
+                        <p>Open your beautiful handcrafted journal and write with ink, record a voice entry, or create visual art. Choose the modality that feels right today.</p>
                     </div>
-                    <div class="step-card fade-in stagger-1" style="animation-delay: 0.2s;">
+                    <div class="step-card">
                         <div class="step-number">2</div>
-                        <h3 class="step-title">Journal Your Way</h3>
-                        <p class="step-description">
-                            Write by hand or create art, then upload photos of your pages. 
-                            Our AI extracts text and analyzes your unique expression.
-                        </p>
+                        <h3>Tap to Connect</h3>
+                        <p>Tap your journal's NFC chip to your phone. Instant connection—no apps to open, no passwords to remember. Magic in motion.</p>
                     </div>
-                    <div class="step-card fade-in stagger-2" style="animation-delay: 0.4s;">
+                    <div class="step-card">
                         <div class="step-number">3</div>
-                        <h3 class="step-title">Discover Insights</h3>
-                        <p class="step-description">
-                            Receive personalized AI analysis, track emotional patterns, 
-                            and ask daily questions to deepen your self-understanding.
-                        </p>
+                        <h3>Claude AI Analyzes</h3>
+                        <p>Claude extracts your handwriting, transcribes your voice, or analyzes your artwork. Then dives deep into emotional patterns, themes, and insights.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Discover & Grow</h3>
+                        <p>Receive personalized insights, track patterns over time, and watch your journey unfold. Your past self guides your future self.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Pricing -->
-        <section id="pricing" class="pricing">
+        <!-- Creator Story Section -->
+        <section id="about" class="section creator-story">
             <div class="container">
-                <div class="section-header">
-                    <div class="section-badge fade-in">Simple Pricing</div>
-                    <h2 class="section-title fade-in stagger-1">One Plan, Everything Included</h2>
-                    <p class="section-subtitle fade-in stagger-2">
-                        Access all features with our single subscription plan
+                <div class="section-header fade-in">
+                    <span class="section-badge">Built in Austria</span>
+                    <h2 class="section-title">From Coffee Shop to AI Innovation</h2>
+                    <p class="section-description">
+                        The story of how a philosophy student working at a bakery built the future of journaling with Claude AI.
                     </p>
                 </div>
-                <div class="pricing-grid" style="justify-content: center;">
-                    <div class="pricing-card featured fade-in" style="max-width: 400px; margin: 0 auto;">
-                        <h3 class="pricing-tier">Artisan</h3>
-                        <div class="pricing-price">€11.99<span>/month</span></div>
-                        <p class="pricing-description">Everything you need for deep self-discovery and growth</p>
+                <div class="story-content">
+                    <div class="story-image fade-in stagger-1">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80" alt="Developer working">
+                        <div class="story-badge">🇦🇹 Made in Austria</div>
+                    </div>
+                    <div class="story-text fade-in stagger-2">
+                        <h3>"Everyone should be able to write their own book"</h3>
+                        <p>
+                            At 30, I took a leave from university (High School Teachers' Education—Informatics & English) to pursue a dream. Working part-time at a local coffee shop in a small Austrian village to fund development, I read Marcus Aurelius' <em>Meditations</em> and watched my mother journal every day.
+                        </p>
+                        <p>
+                            I thought: what if everyone could write their own Meditations? What if AI could help us understand our patterns like Marcus understood his?
+                        </p>
+                        <div class="story-quote">
+                            "I had zero traditional coding skills. Just a clear vision and Claude AI as my development partner. Together, we built the entire app—45 journey paths, voice recording, NFC integration, everything. This is proof that you don't need to code to build technology. You need to understand people."
+                        </div>
+                        <p>
+                            From chemistry student in Georgia → car accident → moving to Austria at 26 → 2 years learning German → starting a new degree → taking the leap to build Καιρός. Every struggle taught me something: resilience, patience, vision over perfection.
+                        </p>
+                        <div class="story-highlights">
+                            <div class="story-highlight-item">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span><strong>Built 100% with Claude AI</strong> - No traditional developers</span>
+                            </div>
+                            <div class="story-highlight-item">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span><strong>5 active beta users</strong> - Building in public from day 1</span>
+                            </div>
+                            <div class="story-highlight-item">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span><strong>Philosophy-driven design</strong> - Stoic principles meet modern tech</span>
+                            </div>
+                            <div class="story-highlight-item">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="9 11 12 14 22 4" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span><strong>Daily testing</strong> - I journal 3x/day to perfect every feature</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Real Feedback</span>
+                    <h2 class="section-title">What Beta Users Are Saying</h2>
+                    <p class="section-description">
+                        5 active testers helping shape the future of journaling.
+                    </p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card fade-in stagger-1">
+                        <div class="testimonial-rating">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "The AI analysis feels like having a wise friend who remembers everything I've shared and helps me see patterns I'd never notice on my own. The voice feature made me realize I'm more honest when speaking than writing."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">S</div>
+                            <div class="author-info">
+                                <h4>Sarah M.</h4>
+                                <p>Beta User, 32</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card fade-in stagger-2">
+                        <div class="testimonial-rating">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "I've tried every journaling app. They all felt soulless. Καιρός gives me the best of both worlds—the tactile joy of writing with ink, plus insights I could never generate myself. The NFC tap is pure magic."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h4>Marcus L.</h4>
+                                <p>Beta User, 28</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card fade-in stagger-3">
+                        <div class="testimonial-rating">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <p class="testimonial-text">
+                            "The visual journaling paths opened up a whole new way for me to process emotions. The color psychology journey helped me understand my moods in ways words never could. This is revolutionary."
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">E</div>
+                            <div class="author-info">
+                                <h4>Elena K.</h4>
+                                <p>Beta User, 35</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="section pricing">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Kickstarter Exclusive</span>
+                    <h2 class="section-title">Early Adopter Pricing</h2>
+                    <p class="section-description">
+                        Premium journals with NFC technology + AI-powered subscriptions. Lock in lifetime discounts by backing on Kickstarter.
+                    </p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card fade-in stagger-1">
+                        <div class="pricing-tier">Essential</div>
+                        <div class="pricing-price">€89<span>/one-time</span></div>
+                        <p class="pricing-period">+ €11.99/month after 3 months</p>
                         <ul class="pricing-features">
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> All 40 journey paths (7-100 days)</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> AI personality insights</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Daily AI questions</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Advanced handwriting recognition (92%+ accuracy)</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Visual & text journaling</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Voice journaling</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Comprehensive analytics</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Emotional pattern tracking</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> PDF book export</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> End-to-end encryption</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check"><polyline points="20,6 9,17 4,12"/></svg> Unlimited storage</li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Leatherette journal with NFC chip
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                200 premium pages
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                3-month AI subscription included
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Basic handwriting extraction
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Emotional tone analysis
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                1GB cloud storage
+                            </li>
                         </ul>
-                        <button class="pricing-button">Start Your Journey</button>
-                        <div style="margin-top: 1rem; text-align: center; color: var(--text-light); font-size: 0.875rem;">
-                            7-day free trial • Cancel anytime
-                        </div>
+                        <a href="#cta" class="btn btn-secondary pricing-cta">Select Essential</a>
+                    </div>
+
+                    <div class="pricing-card featured fade-in stagger-2">
+                        <div class="pricing-tier">Insight</div>
+                        <div class="pricing-price">€146<span>/one-time</span></div>
+                        <p class="pricing-period">+ €16.99/month after 6 months</p>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Genuine leather journal + gold accents
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                250 premium pages
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                6-month AI subscription included
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Advanced pattern recognition
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Voice journaling paths
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Visual journaling paths
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                5GB cloud storage
+                            </li>
+                        </ul>
+                        <a href="#cta" class="btn btn-primary pricing-cta">Select Insight</a>
+                    </div>
+
+                    <div class="pricing-card fade-in stagger-3">
+                        <div class="pricing-tier">Legacy</div>
+                        <div class="pricing-price">€225<span>/one-time</span></div>
+                        <p class="pricing-period">+ €21.99/month after 12 months</p>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Hand-bound leather + gold leaf edges
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                300 archival-quality pages
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                12-month AI subscription included
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Unlimited handwriting recognition
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                All 45 journey paths
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Multi-modal Inner Elements path
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Unlimited cloud storage
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20 6 9 17 4 12" stroke="currentColor"/>
+                                </svg>
+                                Priority support
+                            </li>
+                        </ul>
+                        <a href="#cta" class="btn btn-primary pricing-cta">Select Legacy</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Founder Section -->
-        <section id="about" class="founder">
-            <div class="container">
-                <div class="founder-content">
-                    <div class="founder-image-container">
-                        <img src="https://i.imgur.com/YJcaiEC.jpeg" 
-                             alt="Georgie - Founder of Καιρός" 
-                             class="founder-image">
-                    </div>
-                    <div class="founder-text">
-                        <h3 class="fade-in">Meet Georgie</h3>
-                        <p class="fade-in stagger-1">
-                            From chemistry student to AI innovator, my journey from Georgia to Austria shaped 
-                            a unique perspective on bridging ancient wisdom with modern technology.
-                        </p>
-                        <div class="founder-quote fade-in stagger-2">
-                            "Everyone should be able to write their own book. Inspired by Marcus Aurelius' 
-                            Meditations, I created Καιρός to help you discover the wisdom within yourself."
-                        </div>
-                        <p class="fade-in stagger-3">
-                            Working part-time at a local coffee shop while building Καιρός, I believe in 
-                            authentic creation over corporate scaling. This app was built entirely with Claude AI 
-                            because sometimes vision matters more than traditional coding skills.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section id="get-started" class="final-cta">
-            <div class="container">
-                <h2 class="fade-in">Ready to Transform Your Inner World?</h2>
-                <p class="fade-in stagger-1">
-                    Join the Kickstarter campaign and be among the first to experience AI-powered journaling
-                </p>
-                <a href="https://www.kickstarter.com/projects/georgies/a-return-to-mindful-handwriting-in-a-digital-era" target="_blank" class="final-cta-button fade-in stagger-2">
-                    Back Καιρός on Kickstarter
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </a>
-                <div class="immediate-option fade-in stagger-3">
-                    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
-                        Can't wait? <a href="#pricing" style="color: var(--primary-color); text-decoration: underline;">Start with our digital subscription today</a>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <p class="fade-in stagger-4" style="color: var(--text-light); font-size: 0.95rem;">
+                        🎁 <strong>Kickstarter Early Bird:</strong> Get 25% off + 3 extra subscription months + exclusive NFC tag
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="section cta-section">
+            <div class="container">
+                <div class="cta-content fade-in">
+                    <h2>Start Your Journey with Καιρός</h2>
+                    <p>
+                        Join the waitlist for our Kickstarter launch. Be among the first to experience the future of journaling—where ancient wisdom meets modern AI.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="https://www.kickstarter.com" target="_blank" class="btn btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Join Kickstarter Waitlist
+                        </a>
+                        <a href="mailto:contact@kairos-journal.com" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Get Updates via Email
+                        </a>
+                    </div>
+                    <div class="social-proof">
+                        <div class="social-proof-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor"/>
+                                <circle cx="9" cy="7" r="4" stroke="currentColor"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor"/>
+                            </svg>
+                            5 Active Beta Users
+                        </div>
+                        <div class="social-proof-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor"/>
+                            </svg>
+                            100% Positive Feedback
+                        </div>
+                        <div class="social-proof-item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"/>
+                            </svg>
+                            Privacy-First Design
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2031,45 +2159,69 @@
                 <div class="footer-content">
                     <div class="footer-section">
                         <h4>Καιρός</h4>
-                        <p style="color: #9ca3af; margin-bottom: 1rem;">
-                            AI-powered journaling for personal growth and self-discovery.
+                        <p>
+                            AI-powered journaling for personal growth and self-discovery. Built with Claude AI in Austria.
                         </p>
+                        <div class="social-links">
+                            <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" stroke="currentColor"/>
+                                    <circle cx="4" cy="4" r="2" stroke="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" stroke="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:contact@kairos-journal.com" class="social-link" aria-label="Email">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/>
+                                    <polyline points="22,6 12,13 2,6" stroke="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                     <div class="footer-section">
-                        <h4>Features</h4>
-                        <a href="#features">AI Personality Insights</a>
-                        <a href="#features">40 Journey Paths</a>
-                        <a href="#features">Visual Journaling</a>
-                        <a href="#features">Privacy Protection</a>
+                        <h4>Product</h4>
+                        <a href="#features">Features</a>
+                        <a href="#journeys">45 Journey Paths</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="#how-it-works">How It Works</a>
                     </div>
                     <div class="footer-section">
                         <h4>Company</h4>
-                        <a href="#about">About</a>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <a href="#about">About Us</a>
+                        <a href="#about">Our Story</a>
                         <a href="mailto:contact@kairos-journal.com">Contact</a>
+                        <a href="#">Press Kit</a>
                     </div>
                     <div class="footer-section">
-                        <h4>Connect</h4>
-                        <a href="#">Instagram</a>
-                        <a href="#">LinkedIn</a>
-                        <a href="#">Twitter</a>
-                        <a href="mailto:contact@kairos-journal.com">Email</a>
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">GDPR Compliance</a>
+                        <a href="#">Patent Pending</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2025 Καιρός Smart Journal. All rights reserved. | Built with ❤️ in Austria</p>
+                    <p>&copy; 2025 Καιρός Smart Journal. All rights reserved.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.7;">
+                        Built with ❤️ and Claude AI in a small village in Austria 🇦🇹
+                    </p>
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        // Force HTTPS redirect
-        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
-        }
-
         // Loading Screen
         window.addEventListener('load', function() {
             const loadingOverlay = document.getElementById('loadingOverlay');
@@ -2078,15 +2230,12 @@
             setTimeout(() => {
                 loadingOverlay.classList.add('hidden');
                 mainContent.classList.add('visible');
-                
-                // Start animations after loading
                 initAnimations();
             }, 2000);
         });
 
         // Initialize animations
         function initAnimations() {
-            // Animate elements on scroll
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -2098,14 +2247,6 @@
                         if (entry.target.classList.contains('fade-in')) {
                             entry.target.classList.add('animate');
                         }
-                        if (entry.target.classList.contains('stat-item')) {
-                            entry.target.classList.add('animate');
-                            // Animate counter
-                            const counter = entry.target.querySelector('.stat-number[data-target]');
-                            if (counter) {
-                                animateCounter(counter);
-                            }
-                        }
                         if (entry.target.classList.contains('step-card')) {
                             entry.target.classList.add('animate');
                         }
@@ -2113,30 +2254,9 @@
                 });
             }, observerOptions);
 
-            // Observe all animated elements
-            document.querySelectorAll('.fade-in, .stat-item, .step-card').forEach(el => {
+            document.querySelectorAll('.fade-in, .step-card').forEach(el => {
                 observer.observe(el);
             });
-        }
-
-        // Animated Counter
-        function animateCounter(counter) {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = 2000;
-            const increment = target / (duration / 16);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                    counter.textContent = Math.floor(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target + (counter.parentElement.querySelector('.stat-label').textContent.includes('Accuracy') ? '%' : '');
-                }
-            };
-
-            updateCounter();
         }
 
         // Navbar Scroll Effect
@@ -2148,10 +2268,8 @@
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = (currentScroll / maxScroll) * 100;
 
-            // Update scroll indicator
             scrollIndicator.style.transform = `scaleX(${scrollPercent / 100})`;
 
-            // Navbar effect
             if (currentScroll > 100) {
                 navbar.classList.add('scrolled');
             } else {
@@ -2169,14 +2287,14 @@
             const icon = mobileMenuToggle.querySelector('svg');
             if (mobileMenu.classList.contains('active')) {
                 icon.innerHTML = `
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
                 `;
             } else {
                 icon.innerHTML = `
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
                 `;
             }
         });
@@ -2187,14 +2305,14 @@
                 mobileMenu.classList.remove('active');
                 const icon = mobileMenuToggle.querySelector('svg');
                 icon.innerHTML = `
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
                 `;
             });
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2208,7 +2326,7 @@
             });
         });
 
-        // Parallax effect for hero background
+        // Parallax effect for hero
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
@@ -2223,12 +2341,17 @@
                 mobileMenu.classList.remove('active');
                 const icon = mobileMenuToggle.querySelector('svg');
                 icon.innerHTML = `
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/>
                 `;
             }
         });
+
+        // Console Easter Egg
+        console.log('%c🌟 Καιρός Smart Journal', 'font-size: 20px; font-weight: bold; color: #10B981;');
+        console.log('%cBuilt 100% with Claude AI by a philosophy student in Austria', 'font-size: 14px; color: #8B5CF6;');
+        console.log('%cWant to join the team? Email: contact@kairos-journal.com', 'font-size: 12px; color: #06B6D4;');
     </script>
 </body>
 </html>
